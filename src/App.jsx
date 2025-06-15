@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { TodoProvider } from "./context";
+import TodoFrom from "./components/TodoFrom";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -43,7 +44,7 @@ const App = () => {
     <TodoProvider
       value={{ todos, addTodo, updateTodo, deleteTodo, toggleTodo }}
     >
-      hello
+      <TodoFrom />
     </TodoProvider>
   );
 };
