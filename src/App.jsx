@@ -1,8 +1,16 @@
-import React from 'react'
+import { useState } from 'react'
+import { TodoProvider } from './context'
 
 const App = () => {
+  const [todos, setTodos] = useState([])
+  
+  const addTodo = (todo) => {
+    setTodos(prev => [ {todo, ...prev}])
+  }
   return (
-    <div className='bg-red-700'>App</div>
+    <TodoProvider value={{ }}>
+      hello
+    </TodoProvider>
   )
 }
 
