@@ -28,14 +28,21 @@ const App = () => {
 
   // Get the data from localStorage
   useEffect(() => {
-    const stored = localStorage.getItem('todos');
-    if(stored) {
-      setTodos(JSON.parse(stored))
+    const stored = localStorage.getItem("todos");
+    if (stored) {
+      setTodos(JSON.parse(stored));
     }
   }, []);
 
+  // Set the data to localStorage
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
-    <TodoProvider value={{ todos, addTodo, updateTodo, deleteTodo, toggleTodo }}>
+    <TodoProvider
+      value={{ todos, addTodo, updateTodo, deleteTodo, toggleTodo }}
+    >
       hello
     </TodoProvider>
   );
