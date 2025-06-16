@@ -1,7 +1,25 @@
-@import 'tailwindcss'; 
+@import 'tailwindcss';
 
 body {
-  margin: 20rem;
-  background-color: rgb(57, 58, 58);
-  color: white;
+  margin: 2rem;
+  font-family: 'Inter', sans-serif;
+   background: radial-gradient(circle at top left, #a5f3fc, #38bdf8, #3b82f6);
+  min-height: 100vh;
+  color: #1f2937;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+
+input, button {
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.line-through {
+  text-decoration: line-through;
+  opacity: 0.6;
 }

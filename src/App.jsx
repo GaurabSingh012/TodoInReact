@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { TodoProvider } from "./context";
-import TodoFrom from "./components/TodoFrom";
+import { TodoFrom, TodoItem } from "./components";
 
 const App = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const stored = localStorage.getItem("todos");
+    return stored ? JSON.parse(stored) : [];
+  });
 
   const addTodo = (todo) => {
     setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
@@ -11,7 +14,7 @@ const App = () => {
 
   const updateTodo = (id, todo) => {
     setTodos((prev) =>
-      prev.map((prevTodo) => (prevTodo.id === todo.id ? todo : prevTodo))
+      prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo))
     );
   };
 
@@ -27,15 +30,6 @@ const App = () => {
     );
   };
 
-  // Get the data from localStorage
-  useEffect(() => {
-    const stored = localStorage.getItem("todos");
-    if (stored) {
-      setTodos(JSON.parse(stored));
-    }
-  }, []);
-
-  // Set the data to localStorage
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
@@ -44,7 +38,17 @@ const App = () => {
     <TodoProvider
       value={{ todos, addTodo, updateTodo, deleteTodo, toggleTodo }}
     >
-      <TodoFrom />
+      <main className="max-w-xl mx-auto mt-10 p-4 shadow bg-white rounded">
+        <h1 className="text-3xl font-bold text-center text-blue-800 mb-6">
+          📝 Todo App
+        </h1>
+        <TodoFrom />
+        <div className="space-y-2">
+          {todos.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} />
+          ))}
+        </div>
+      </main>
     </TodoProvider>
   );
 };
